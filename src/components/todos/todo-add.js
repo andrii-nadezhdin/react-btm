@@ -1,47 +1,49 @@
 import React from 'react';
+import FormInput from '../form/form-input';
+import Form from '../form/form'
 
 export default class TodoAdd extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: '',
-            text: ''
+            title:'',
+            isTitleValid: true,
+            text:'',
+            isTextValid: true
         }
     }
 
     onAddClick = () => {
         const {title, text} = this.state;
-        this.props.onAddClick(title, text)
         this.setState({
             title:'',
-            text:''
-        })
+            isTitleValid: !!title,
+            text:'',
+            isTextValid: !!text
+        });
+        if (!!title && !!text) {
+            this.props.onAddClick(title, text);
+        }
     }
 
     render() {
         return (
-            <div class="ui container segment ui form">
-                <div className="ui header">Add new item</div>
-                <div className="field">
-                    <label>Title</label>
-                    <input
-                        type='text'
-                        value={this.state.title}
-                        onChange={e => this.setState({title: e.target.value})}
-                        placeholder="Title"
-                    />
-                </div>
-                <div className="field">
-                    <label>Text</label>
-                    <input
-                        type='text'
-                        value={this.state.text}
-                        onChange={e => this.setState({text: e.target.value})}
-                        placeholder="Text"
-                    />
-                </div>
-                <button onClick={this.onAddClick} className="ui primary button">Add #{this.props.newItemNumber}</button>
-            </div>
+            <Form title='Add new item' submitText={`Add #${this.props.newItemNumber}`} onClick={this.onAddClick}>
+                <FormInput
+                    label='Title'
+                    value={this.state.title}
+                    onChange={v => this.setState({title: v, isTitleValid: true})}
+                    placeholder="Title"
+                    isValid={this.state.isTitleValid}
+                />
+                <FormInput
+                    label='Text'
+                    value={this.state.text}
+                    onChange={v => this.setState({text: v, isTextValid: true})}
+                    placeholder="Text"
+                    isValid={this.state.isTextValid}
+                />
+            </Form>
         );
     }
 }
