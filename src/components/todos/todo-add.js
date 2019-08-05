@@ -1,6 +1,7 @@
 import React from 'react';
 import FormInput from '../form/form-input';
-import Form from '../form/form'
+import FormButton from '../form/form-button';
+import Form from '../form/form';
 
 export default class TodoAdd extends React.Component {
     constructor() {
@@ -28,7 +29,7 @@ export default class TodoAdd extends React.Component {
 
     render() {
         return (
-            <Form title='Add new item' submitText={`Add #${this.props.newItemNumber}`} onClick={this.onAddClick}>
+            <Form title='Add new item'>
                 <FormInput
                     label='Title'
                     value={this.state.title}
@@ -43,6 +44,7 @@ export default class TodoAdd extends React.Component {
                     placeholder="Text"
                     isValid={this.state.isTextValid}
                 />
+                <FormButton submitText={`Add #${this.props.newItemNumber}`} onClick={this.onAddClick} />
             </Form>
         );
     }
