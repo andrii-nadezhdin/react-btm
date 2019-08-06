@@ -12,6 +12,5 @@ export default () => {
                 <Route path='/about' exact component={AboutMePage} />
             </div>
         </BrowserRouter>
-        
     )
 }

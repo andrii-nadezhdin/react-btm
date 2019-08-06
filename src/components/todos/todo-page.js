@@ -7,7 +7,23 @@ import {newGuid} from '../../utils/guid';
 export default class TodoPage extends React.Component {
     constructor() {
         super();
-        this.state = {todos: []}
+        this.state = {todos: [
+            {
+                id: newGuid(),
+                title:'Do workout',
+                text:'Just DO it!'
+            },
+            {
+                id: newGuid(),
+                title:'Clean table',
+                text:'Shame lazy me'
+            },
+            {
+                id: newGuid(),
+                title:'Drink coffee',
+                text:'Any time'
+            }
+        ]}
     }
 
     onDeleteClick = (id) => {
