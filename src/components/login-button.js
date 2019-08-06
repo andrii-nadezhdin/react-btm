@@ -6,8 +6,9 @@ export default () => {
         <LoginContext.Consumer>
             {value =>
                 <button
-                    class={`ui button ${value.isLoggedIn ? 'negative' : 'positive'}`}
+                    className={`ui button ${value.isLoggedIn ? 'negative' : 'positive'}`}
                     onClick={() => value.isLoggedIn ? value.onLogout() : value.onLogin('anna01')}
+                    disabled={value.inProcess}
                 >
                     {value.isLoggedIn ? 'Logout' : 'Login'}
                 </button>

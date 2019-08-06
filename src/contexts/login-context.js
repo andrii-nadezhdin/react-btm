@@ -1,22 +1,29 @@
 import React from 'react';
 
-const LoginContext = React.createContext({isLoggedIn: false, userName:  null});
+const defaults = {
+    isLoggedIn: false,
+    inProcess: false,
+    userName:  null
+};
+
+const LoginContext = React.createContext(defaults);
 
 export class LoginStore extends React.Component {
-    state = {
-        isLoggedIn: false,
-        userName: null
+    state = defaults;
+
+    onLogin = userName => {
+        this.setState({inProcess: true})
+        setTimeout(() => this.setState({
+            isLoggedIn: true,
+            inProcess: false,
+            userName
+        }), 3000)
     };
 
-    onLogin = userName => setTimeout(this.setState({
-        isLoggedIn: true,
-        userName
-    }), 1000);
-
-    onLogout = () => setTimeout(this.setState({
+    onLogout = () => this.setState({
         isLoggedIn: false,
         userName: null
-    }), 1000);
+    });
 
     render() {
         return(

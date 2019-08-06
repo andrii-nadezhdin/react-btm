@@ -8,7 +8,7 @@ export default () => {
             <div className="ui large secondary menu">
                 <Link to='/todos' className='item'>Todos</Link>
                 <Link to='/about' className='item'>About me</Link>
-                <div class="right menu">
+                <div className="right menu">
                     <LoginButton className='ui item'/>
                 </div>
             </div>
