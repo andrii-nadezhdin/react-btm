@@ -3,6 +3,7 @@ import TodoList from './todo-list';
 import TodoAdd from './todo-add';
 import Header from '../header';
 import {newGuid} from '../../utils/guid';
+import LoginContext from '../../contexts/login-context';
 
 export default class TodoPage extends React.Component {
     constructor() {
@@ -46,9 +47,12 @@ export default class TodoPage extends React.Component {
         return (
             <div>
                 <Header />
-                <TodoAdd onAddClick={this.onAddClick} newItemNumber={this.state.todos.length + 1} />
+                <LoginContext.Consumer>
+                    {value => value.isLoggedIn ? <TodoAdd onAddClick={this.onAddClick} newItemNumber={this.state.todos.length + 1} /> : null}
+                </LoginContext.Consumer>
                 <TodoList todos={this.state.todos} onDeleteClick={this.onDeleteClick} />
             </div>
+
         )
     }
 }

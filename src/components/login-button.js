@@ -1,8 +1,17 @@
-import React from 'react'
+import React from 'react';
+import LoginContext from '../contexts/login-context';
 
-export default (props) => {
-    const { isLoggedIn } = props;
+export default () => {
     return (
-        <div class={`ui button ${isLoggedIn ? 'negative' : 'positive'}`}>{isLoggedIn ? 'Logout' : 'Login'}</div>
+        <LoginContext.Consumer>
+            {value =>
+                <button
+                    class={`ui button ${value.isLoggedIn ? 'negative' : 'positive'}`}
+                    onClick={() => value.isLoggedIn ? value.onLogout() : value.onLogin('anna01')}
+                >
+                    {value.isLoggedIn ? 'Logout' : 'Login'}
+                </button>
+            }
+        </LoginContext.Consumer>
     );
 }
