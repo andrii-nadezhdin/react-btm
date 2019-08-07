@@ -5,27 +5,6 @@ import Header from '../header';
 import {newGuid} from '../../utils/guid';
 
 export default class TodoPage extends React.Component {
-    constructor() {
-        super();
-        this.state = {todos: [
-            {
-                id: newGuid(),
-                title:'Do workout',
-                text:'Just DO it!'
-            },
-            {
-                id: newGuid(),
-                title:'Clean table',
-                text:'Shame lazy me'
-            },
-            {
-                id: newGuid(),
-                title:'Drink coffee',
-                text:'Any time'
-            }
-        ]}
-    }
-
     onDeleteClick = (id) => {
         this.setState({todos: this.state.todos.filter(t => t.id !== id)});
     }
@@ -46,7 +25,7 @@ export default class TodoPage extends React.Component {
         return (
             <div>
                 <Header />
-                <TodoAdd onAddClick={this.onAddClick} newItemNumber={this.state.todos.length + 1} />
+                <TodoAdd />
                 <TodoList todos={this.state.todos} onDeleteClick={this.onDeleteClick} />
             </div>
         )

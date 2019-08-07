@@ -2,8 +2,9 @@ import React from 'react';
 import FormInput from '../form/form-input';
 import FormButton from '../form/form-button';
 import Form from '../form/form';
+import { connect } from 'react-redux'
 
-export default class TodoAdd extends React.Component {
+class TodoAdd extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -49,3 +50,10 @@ export default class TodoAdd extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (store) => {
+    return {
+        todosCount: store.todos.length
+    }
+}
+export default connect(mapStateToProps, {})
