@@ -2,7 +2,9 @@ import React from 'react';
 import FormInput from '../form/form-input';
 import FormButton from '../form/form-button';
 import Form from '../form/form';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { addTodoItem } from '../../actions';
+import { newGuid } from '../../utils/guid';
 
 class TodoAdd extends React.Component {
     constructor() {
@@ -24,7 +26,11 @@ class TodoAdd extends React.Component {
             isTextValid: !!text
         });
         if (!!title && !!text) {
-            this.props.onAddClick(title, text);
+            this.props.addTodoItem({
+                id: newGuid(),
+                title,
+                text
+            });
         }
     }
 
@@ -53,7 +59,8 @@ class TodoAdd extends React.Component {
 
 const mapStateToProps = (store) => {
     return {
-        todosCount: store.todos.length
+        newItemNumber: store.todos.length + 1
     }
 }
-export default connect(mapStateToProps, {})
+
+export default connect(mapStateToProps, { addTodoItem })(TodoAdd);

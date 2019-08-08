@@ -1,7 +1,8 @@
 import React from 'react';
 import TodoItem from './todo-item';
+import { connect } from 'react-redux';
 
-export default (props) => {
+const TodoList = (props) => {
     const todosList = props.todos
         .map(todo => (
             <TodoItem
@@ -9,7 +10,6 @@ export default (props) => {
                 id={todo.id}
                 text={todo.text}
                 title={todo.title}
-                onDeleteClick={props.onDeleteClick}
             />
         ));
     return (
@@ -18,3 +18,11 @@ export default (props) => {
         </div>
     );
 }
+
+const mapStateToProps = (store) => {
+    return {
+        todos: store.todos
+    }
+}
+
+export default connect(mapStateToProps)(TodoList);
