@@ -1,4 +1,5 @@
 export class Actions {
+    static INITIATE_USER_LOGIN = 'INITIATE_USER_LOGIN';
     static USER_LOGIN = 'USER_LOGIN';
     static USER_LOGIN_INPROCESS = 'USER_LOGIN_INPROCESS';
     static USER_LOGOUT = 'USER_LOGOUT';

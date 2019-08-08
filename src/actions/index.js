@@ -14,14 +14,11 @@ export const removeTodoItem = (id) => {
     }
 }
 
-export const userLoginAction = (userName) => dispatch => {
-    dispatch({
-        type: Actions.USER_LOGIN_INPROCESS
-    });
-    setTimeout(() => dispatch({
-        type: Actions.USER_LOGIN,
+export const userLoginAction = (userName) => {
+    return {
+        type: Actions.INITIATE_USER_LOGIN,
         userName
-    }), 3000);
+    }
 }
 
 export const userLogoutAction = () => {
