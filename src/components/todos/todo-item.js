@@ -1,28 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { removeTodoItem } from '../../actions';
+import React from 'reactn';
 
-const TodoItem =  (props) => {
-    return (
-        <div className="ui center aligned container segment">
-            <h2 className="ui header">{props.title}</h2>
-            <p>{props.text}</p>
-            {props.isLoggedIn &&
-                <button
-                    onClick={() => props.removeTodoItem(props.id)}
-                    className='ui red basic button'
-                >
-                    Delete
-                </button>
-            }
-        </div>
-    )
-}
-
-const mapStateToProps = (store) => {
-    return {
-        isLoggedIn: store.loginInfo.isLoggedIn
+export default class TodoItem extends React.Component {
+    render() {
+        return (
+            <div className="ui center aligned container segment">
+                <h2 className="ui header">{this.props.title}</h2>
+                <p>{this.props.text}</p>
+                {this.global.loginInfo.isLoggedIn &&
+                    <button
+                        onClick={() => this.setGlobal({
+                            todos: this.global.todos.filter(t => t.id !== this.props.id)
+                        })}
+                        className='ui red basic button'
+                    >
+                        Delete
+                    </button>
+                }
+            </div>
+        )
     }
 }
-
-export default connect(mapStateToProps, {removeTodoItem})(TodoItem);

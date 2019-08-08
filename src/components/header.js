@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reactn';
 import { Link } from 'react-router-dom';
 import LoginButton from './login-button';
 

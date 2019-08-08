@@ -1,13 +1,12 @@
-import React from 'react';
+import React from 'reactn';
 import TodoList from './todo-list';
 import TodoAdd from './todo-add';
 import Header from '../header';
-import { connect } from 'react-redux';
 
 
-class TodoPage extends React.Component {
+export default class TodoPage extends React.Component {
     render() {
-        const { isLoggedIn } = this.props;
+        const { isLoggedIn } = this.global.loginInfo;
         return (
             <div>
                 <Header />
@@ -17,11 +16,3 @@ class TodoPage extends React.Component {
         )
     }
 }
-
-const mapStateToProps = (store) => {
-    return {
-        isLoggedIn: store.loginInfo.isLoggedIn
-    }
-}
-
-export default connect(mapStateToProps)(TodoPage);

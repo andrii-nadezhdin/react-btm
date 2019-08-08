@@ -1,25 +1,38 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { userLoginAction, userLogoutAction } from '../actions';
+import React from 'reactn';
 
-
-const LoginButton = (props) => {
-    const { isLoggedIn, isInProcess } = props.loginInfo;
-    return (
-        <button
-            className={`ui button ${isLoggedIn ? 'negative' : 'positive'}`}
-            onClick={isLoggedIn ? props.userLogoutAction : () => props.userLoginAction('anna01')}
-            disabled={isInProcess}
-        >
-            {isLoggedIn ? 'Logout' : 'Login'}
-        </button>
-    );
-}
-
-const mapStateToProps = (store) => {
-    return {
-        loginInfo: store.loginInfo
+export default class LoginButton extends React.Component {
+    render() {
+        const { isLoggedIn, isInProcess } = this.global.loginInfo;
+        const logout = () => this.setGlobal({
+            loginInfo: {
+                isLoggedIn: false,
+                isInProcess: false
+            }
+        });
+        const login = () =>  {
+            this.setGlobal({
+                loginInfo: {
+                    isLoggedIn: false,
+                    isInProcess: true
+                }
+            });
+            setTimeout(() => this.setGlobal({
+                loginInfo: {
+                    isLoggedIn: true,
+                    isInProcess: false,
+                    userName: 'anna01'
+                }
+            }), 3000)
+        };
+    
+        return (
+            <button
+                className={`ui button ${isLoggedIn ? 'negative' : 'positive'}`}
+                onClick={isLoggedIn ? logout : login}
+                disabled={isInProcess}
+            >
+                {isLoggedIn ? 'Logout' : 'Login'}
+            </button>
+        );
     }
 }
-
-export default connect(mapStateToProps, { userLoginAction, userLogoutAction })(LoginButton);

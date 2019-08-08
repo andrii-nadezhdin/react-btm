@@ -1,12 +1,11 @@
-import React from 'react';
+import React from 'reactn';
 import FormInput from '../form/form-input';
 import FormButton from '../form/form-button';
 import Form from '../form/form';
-import { connect } from 'react-redux';
-import { addTodoItem } from '../../actions';
 import { newGuid } from '../../utils/guid';
 
-class TodoAdd extends React.Component {
+
+export default class TodoAdd extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -26,10 +25,15 @@ class TodoAdd extends React.Component {
             isTextValid: !!text
         });
         if (!!title && !!text) {
-            this.props.addTodoItem({
-                id: newGuid(),
-                title,
-                text
+            this.setGlobal({
+                todos: [
+                    ...this.global.todos,
+                    {
+                        id: newGuid(),
+                        title,
+                        text
+                    }
+                ]
             });
         }
     }
@@ -51,16 +55,8 @@ class TodoAdd extends React.Component {
                     placeholder="Text"
                     isValid={this.state.isTextValid}
                 />
-                <FormButton submitText={`Add #${this.props.newItemNumber}`} onClick={this.onAddClick} />
+                <FormButton submitText={`Add #${this.global.todos.length + 1}`} onClick={this.onAddClick} />
             </Form>
         );
     }
-}
-
-const mapStateToProps = (store) => {
-    return {
-        newItemNumber: store.todos.length + 1
-    }
-}
-
-export default connect(mapStateToProps, { addTodoItem })(TodoAdd);
+};
