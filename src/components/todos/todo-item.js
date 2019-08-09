@@ -1,16 +1,17 @@
-import React from 'reactn';
+import React from 'react';
+import { observer } from 'mobx-react';
 
-export default class TodoItem extends React.Component {
+@observer
+class TodoItem extends React.Component {
     render() {
+        const {loginInfoStore, todoStore} = this.props;
         return (
             <div className="ui center aligned container segment">
                 <h2 className="ui header">{this.props.title}</h2>
                 <p>{this.props.text}</p>
-                {this.global.loginInfo.isLoggedIn &&
+                {loginInfoStore.loginInfo.isLoggedIn &&
                     <button
-                        onClick={() => this.setGlobal({
-                            todos: this.global.todos.filter(t => t.id !== this.props.id)
-                        })}
+                        onClick={() => todoStore.deleteTodo(this.props.id)}
                         className='ui red basic button'
                     >
                         Delete
@@ -20,3 +21,5 @@ export default class TodoItem extends React.Component {
         )
     }
 }
+
+export default TodoItem;

@@ -1,9 +1,11 @@
-import React from 'reactn';
+import React from 'react';
 import Header from '../header';
+import {observer} from 'mobx-react';
 
-export default class AboutMePage extends React.Component {
+@observer
+class AboutMePage extends React.Component {
     render() {
-        const { isLoggedIn, userName } = this.global.loginInfo;
+        const { isLoggedIn, userName } = this.props.loginInfoStore.loginInfo;
         return (
             <div>
                 <Header />
@@ -15,3 +17,5 @@ export default class AboutMePage extends React.Component {
         )
     }
 }
+
+export default AboutMePage;

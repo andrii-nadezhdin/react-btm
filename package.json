@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "mobx": "^5.13.0",
+    "mobx-react": "^6.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "reactn": "^2.1.7",
-    "reactn-devtools": "^1.0.1"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,8 +31,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8"
-  }
+  "devDependencies": {}
 }

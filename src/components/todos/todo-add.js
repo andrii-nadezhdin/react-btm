@@ -1,62 +1,63 @@
-import React from 'reactn';
+import React from 'react';
 import FormInput from '../form/form-input';
 import FormButton from '../form/form-button';
 import Form from '../form/form';
 import { newGuid } from '../../utils/guid';
+import { observer } from 'mobx-react';
+import {observable, action} from 'mobx';
 
-
-export default class TodoAdd extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            title:'',
-            isTitleValid: true,
-            text:'',
-            isTextValid: true
-        }
+@observer
+class TodoAdd extends React.Component {
+    
+    @observable
+    values = {
+        title:'',
+        isTitleValid: true,
+        text:'',
+        isTextValid: true
     }
 
+    @action
     onAddClick = () => {
         const {title, text} = this.state;
-        this.setState({
+        this.values = {
             title:'',
             isTitleValid: !!title,
             text:'',
             isTextValid: !!text
-        });
+        };
         if (!!title && !!text) {
-            this.setGlobal({
-                todos: [
-                    ...this.global.todos,
-                    {
-                        id: newGuid(),
-                        title,
-                        text
-                    }
-                ]
-            });
+            this.props.todoStore.addTodo(title, text);
         }
     }
+
+    @action
+    onTitleChange = (value) => this.values.title = value;
+
+    @action
+    onTextChange = (value) => this.values.text = value;
 
     render() {
         return (
             <Form title='Add new item'>
                 <FormInput
                     label='Title'
-                    value={this.state.title}
-                    onChange={v => this.setState({title: v, isTitleValid: true})}
+                    value={this.values.title}
+                    onChange={v => this.onTitleChange}
                     placeholder="Title"
-                    isValid={this.state.isTitleValid}
+                    isValid={this.values.isTitleValid}
                 />
                 <FormInput
                     label='Text'
-                    value={this.state.text}
-                    onChange={v => this.setState({text: v, isTextValid: true})}
+                    value={this.values.text}
+                    onChange={v => this.onTextChange}
                     placeholder="Text"
-                    isValid={this.state.isTextValid}
+                    isValid={this.values.isTextValid}
                 />
-                <FormButton submitText={`Add #${this.global.todos.length + 1}`} onClick={this.onAddClick} />
+                <FormButton submitText={`Add #${this.props.todoStore.todosCount + 1}`} onClick={this.onAddClick} />
             </Form>
         );
     }
 };
+
+export default TodoAdd;

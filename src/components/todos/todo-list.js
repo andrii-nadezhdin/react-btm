@@ -1,15 +1,18 @@
-import React from 'reactn';
+import React from 'react';
 import TodoItem from './todo-item';
+import {observer} from 'mobx-react';
 
-export default class TodoList extends React.Component {
+@observer
+class TodoList extends React.Component {
     render() {
-        const todosList = this.global.todos
+        const todosList = this.props.todoStore.todos
             .map(todo => (
                 <TodoItem
                     key={todo.id}
                     id={todo.id}
                     text={todo.text}
                     title={todo.title}
+                    {...this.props}
                 />
             ));
         return (
@@ -19,3 +22,5 @@ export default class TodoList extends React.Component {
         );
     }
 }
+
+export default TodoList;

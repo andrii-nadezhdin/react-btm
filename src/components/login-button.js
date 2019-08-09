@@ -1,34 +1,16 @@
-import React from 'reactn';
+import React from 'react';
+import { observer } from 'mobx-react';
 
-export default class LoginButton extends React.Component {
+@observer
+class LoginButton extends React.Component {
     render() {
-        const { isLoggedIn, isInProcess } = this.global.loginInfo;
-        const logout = () => this.setGlobal({
-            loginInfo: {
-                isLoggedIn: false,
-                isInProcess: false
-            }
-        });
-        const login = () =>  {
-            this.setGlobal({
-                loginInfo: {
-                    isLoggedIn: false,
-                    isInProcess: true
-                }
-            });
-            setTimeout(() => this.setGlobal({
-                loginInfo: {
-                    isLoggedIn: true,
-                    isInProcess: false,
-                    userName: 'anna01'
-                }
-            }), 3000)
-        };
-    
+        const store = this.props.loginInfoStore;
+        const { isLoggedIn, isInProcess } = store.loginInfo;
+
         return (
             <button
                 className={`ui button ${isLoggedIn ? 'negative' : 'positive'}`}
-                onClick={isLoggedIn ? logout : login}
+                onClick={isLoggedIn ? store.logoutUser() : store.loginUser('anna01')}
                 disabled={isInProcess}
             >
                 {isLoggedIn ? 'Logout' : 'Login'}
@@ -36,3 +18,5 @@ export default class LoginButton extends React.Component {
         );
     }
 }
+
+export default LoginButton;
