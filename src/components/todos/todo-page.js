@@ -2,9 +2,10 @@ import React from 'react';
 import TodoList from './todo-list';
 import TodoAdd from './todo-add';
 import Header from '../header';
+import { observer } from 'mobx-react';
 
-
-export default class TodoPage extends React.Component {
+@observer
+class TodoPage extends React.Component {
     render() {
         const { isLoggedIn } = this.props.loginInfoStore.loginInfo;
         return (
@@ -16,3 +17,5 @@ export default class TodoPage extends React.Component {
         )
     }
 }
+
+export default TodoPage;

@@ -10,7 +10,7 @@ class LoginButton extends React.Component {
         return (
             <button
                 className={`ui button ${isLoggedIn ? 'negative' : 'positive'}`}
-                onClick={isLoggedIn ? store.logoutUser() : store.loginUser('anna01')}
+                onClick={isLoggedIn ? () => store.logoutUser() : () => store.loginUser('anna01')}
                 disabled={isInProcess}
             >
                 {isLoggedIn ? 'Logout' : 'Login'}

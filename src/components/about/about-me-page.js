@@ -8,7 +8,7 @@ class AboutMePage extends React.Component {
         const { isLoggedIn, userName } = this.props.loginInfoStore.loginInfo;
         return (
             <div>
-                <Header />
+                <Header {...this.props}/>
                 <div className='ui container segment'>
                     {isLoggedIn ? <h2 className='header'>Hello {userName}!</h2> : null}
                     <img className="ui centered image" src="https://i.kym-cdn.com/entries/icons/original/000/008/342/ihave.jpg" alt='me'/>
